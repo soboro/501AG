@@ -1,0 +1,193 @@
+<!--
+Template
+-->
+<!--
+CSS
+-->
+<style type="text/css">
+<!--
+    
+    :root {
+        --flag_de:"https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png";
+        --flag_su:"https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png";
+        --flag_us:"https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png";
+        --flag_jp:"https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png";
+        --flag_cn:"https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png";
+        --flag_uk:"https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png";
+        --flag_fr:"https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png";
+        --flag_cz:"https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png";
+        
+        --icon-lt:"https://static.wixstatic.com/media/1eae9a_f5831ad5e71847a1b1871d2c089e3252~mv2.png";
+		--icon-mt:"https://static.wixstatic.com/media/1eae9a_135cf9081f454905bb74bc3e82b684ee~mv2.png";
+		--icon-ht:"https://static.wixstatic.com/media/1eae9a_12e817c76f704caa98f6d61521c0182b~mv2.png";
+		--icon-tg:"https://static.wixstatic.com/media/1eae9a_dc1f62b383514d489c12b58e8ec68481~mv2.png";
+		--icon-spg:"https://static.wixstatic.com/media/1eae9a_c459211fa515474fb164239436d7b0cd~mv2.png";
+		
+        --playbutton:"https://static.wixstatic.com/media/1eae9a_36fe888fd8d442d78da0958b4e6c41d5~mv2.png";
+    }
+    
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    tr {
+    }
+    th{
+        text-align: center;
+        vertical-align: middle;
+    }
+    td{
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .sepalator {
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        border-right: none;
+    }
+    .sepalatorrow {
+        height: 66px;
+    }
+    .datarow {
+        height: 66px;
+        
+    }
+    .country {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 90px;
+
+    }
+    .vehicletype {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 66px;
+    }
+    .vehiclename {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 160px;
+    }
+    .map {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+    }
+    .exp {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 92px;
+    }
+    .instructor {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 140px;
+    }
+    .playbutton {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+        width: 66px;
+    }
+    .update {
+        border: 1px solid #999;
+        background-color: #FFFFFF;
+    }
+
+-->
+</style>
+
+<!--
+TABLE
+
+[flags_40x60]
+DE
+https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png
+SU
+https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png
+US
+https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png
+JP
+https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png
+CN
+https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png
+UK
+https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png
+FR
+https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png
+CZ
+https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png
+
+//[typelogo_44x44]
+//LT
+//https://static.wixstatic.com/media/1eae9a_ec579755fca34331aae07ea6b90457a3~mv2.png
+//MT
+//https://static.wixstatic.com/media/1eae9a_c946e517dacf4622b68e50fc40da9739~mv2.png
+//HT
+//https://static.wixstatic.com/media/1eae9a_90fd08e9e543460d8f394fe3511772e7~mv2.png
+//TD
+//https://static.wixstatic.com/media/1eae9a_02cdf7507e2148e7bd537bd3e3667318~mv2.png
+//SPG
+//https://static.wixstatic.com/media/1eae9a_80f84447cdd74ec9a3e5f2a9fcd5d059~mv2.png
+
+[typelogo_22x22]
+LT
+https://static.wixstatic.com/media/1eae9a_f5831ad5e71847a1b1871d2c089e3252~mv2.png
+MT
+https://static.wixstatic.com/media/1eae9a_135cf9081f454905bb74bc3e82b684ee~mv2.png
+HT
+https://static.wixstatic.com/media/1eae9a_12e817c76f704caa98f6d61521c0182b~mv2.png
+TD
+https://static.wixstatic.com/media/1eae9a_dc1f62b383514d489c12b58e8ec68481~mv2.png
+SPG
+https://static.wixstatic.com/media/1eae9a_c459211fa515474fb164239436d7b0cd~mv2.png
+
+[playbutton]
+https://static.wixstatic.com/media/1eae9a_36fe888fd8d442d78da0958b4e6c41d5~mv2.png
+
+--template
+        <tr class="datarow">
+            <td class="country"><img src="" alt=""></td>
+            <td class="vehicletype"><img src="" alt=""></td>
+            <td class="vehiclename"></td>
+            <td class="map"></td>
+            <td class="exp"></td>
+            <td class="instructor">教官</td>
+            <td class="playbutton"><a href="" target="_blank"><img src="https://static.wixstatic.com/media/1eae9a_36fe888fd8d442d78da0958b4e6c41d5~mv2.png" alt=""></a></td>
+            <td class="update"></td>
+        </tr>
+        <tr class="sepalatorrow">
+        </tr>
+-->
+
+
+<table class="drillmovie">
+	<tbody>
+		<tr class="datarow">
+            <th class="country">国名</th>
+            <th class="vehicletype">車種</th>
+            <th class="vehiclename">車輌名</th>
+            <th class="map">マップ</th>
+            <th class="exp">獲得経験値<br>（未補正</th>
+            <th class="instructor">指導教官</th>
+            <th class="playbutton">再生</th>
+            <th class="update">スコア更新日</th>
+		</tr>
+        <tr class="sepalatorrow">
+        </tr>
+        <tr class="datarow">
+            <td class="country"><img src="" alt=""></td>
+            <td class="vehicletype"><img src="" alt=""></td>
+            <td class="vehiclename"></td>
+            <td class="map"></td>
+            <td class="exp"></td>
+            <td class="instructor">教官</td>
+            <td class="playbutton"><a href="" target="_blank"><img src="https://static.wixstatic.com/media/1eae9a_36fe888fd8d442d78da0958b4e6c41d5~mv2.png" alt=""></a></td>
+            <td class="update"></td>
+        </tr>
+        <tr class="sepalatorrow">
+        </tr>
+	</tbody>
+</table>
