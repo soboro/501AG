@@ -1,0 +1,10 @@
+tier,country,vehicletype,vehiclename,map,exp,instructor,link,update
+1,DE,LT,testTank,崖,9999,_sbr,http://1.testdomain.com/,2017/99/99
+2,SU,MT,testTank,崖,9999,_sbr,http://2.testdomain.com/,2017/99/99
+3,US,HT,testTank,崖,9999,_sbr,http://3.testdomain.com/,2017/99/99
+4,JP,TD,testTank,崖,9999,_sbr,http://4.testdomain.com/,2017/99/99
+5,CN,SPG,testTank,崖,9999,_sbr,http://5.testdomain.com/,2017/99/99
+6,GB,LT,testTank,崖,9999,_sbr,http://6.testdomain.com/,2017/99/99
+7,FR,MT,testTank,崖,9999,_sbr,http://7.testdomain.com/,2017/99/99
+8,CZ,HT,testTank,崖,9999,_sbr,http://8.testdomain.com/,2017/99/99
+9,SE,TD,testTank,崖,9999,_sbr,http://9.testdomain.com/,2017/99/99

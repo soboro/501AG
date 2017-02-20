@@ -1,2 +1,2 @@
-Tier,Country,Type,Tank,Field,Sore,Player,Date,Link
-c1,c2,c3,c4,c5,c6,c7,c8,c9
+tier,country,vehicletype,vehiclename,map,exp,instructor,link,update
+1,DE,LT,testTank,崖,9999,_sbr,http://1.testdomain.com/,2017/99/99

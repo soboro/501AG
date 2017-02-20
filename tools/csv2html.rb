@@ -32,76 +32,170 @@
 #        </tr>
 #-->
 
-HTML_TAG_A = "a"
-HTML_TAG_IMG = "img"
+require 'csv'
+
+COUNTRY_DE = "DE"
+COUNTRY_SU = "SU"
+COUNTRY_US = "US"
+COUNTRY_JP = "JP"
+COUNTRY_CN = "CN"
+COUNTRY_GB = "GB"
+COUNTRY_FR = "FR"
+COUNTRY_CZ = "CZ"
+COUNTRY_SE = "SE"
+
+TYPE_LT = "LT"
+TYPE_MT = "MT"
+TYPE_HT = "HT"
+TYPE_TD = "TD"
+TYPE_SPG = "SPG"
+
+
 def double_quater(str)
-    return "\"" << str << "\""
+    return "\"" + str + "\""
 end
 
-def html_tagger(string:, tag:, class:, link:, target:, src:, alt:)
+def tagger_tr(str, cls)
+    pretag = "<tr class=" + double_quater(cls) + ">"
+    suftag = "</tr>"
+    dest_str = "\n" + "\t" + pretag + str + suftag
 
-    pretag = ""
-    suftag = ""
-    dest_str = ""
-
-    if tag == HTML_TAG_A then
-        pretag = HTML_TAG_A << " href=" << double_quater(link) << " target=" << double_quater(target)
-    end
-
-    if tag == HTML_TAG_IMG then
-        pretag = HTML_TAG_IMG << " src =" << double_quater(src) << " alt=" << double_quater(alt)
-    end
-    pretag_str = "<" << tag << ">"
-    suftag_str = "</" << tag << ">"
-    dest_str = pretag_str << str << suftag_str
     return dest_str
 end
 
-require 'csv'
+def tagger_td(str, cls)
+    pretag = "<td class=" + double_quater(cls) + ">"
+    suftag = "</td>"
+    dest_str = "\n" + "\t" + pretag + str + suftag
 
-flag_urls = Hash.new
-flag_urls["DE"] = "https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png";
-flag_urls["SU"] = "https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png";
-flag_urls["US"] = "https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png";
-flag_urls["JP"] = "https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png";
-flag_urls["CN"] = "https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png";
-flag_urls["GB"] = "https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png";
-flag_urls["FR"] = "https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png";
-flag_urls["CZ"] = "https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png";
-flag_urls["SE"] = "https://static.wixstatic.com/media/1eae9a_2291473f297541c09ea9f811a2326cfd~mv2.png";
+    #puts
+    #puts "dest_str : #{dest_str}"
+    #puts
 
-type_icon_urls = Hash.new
-type_icon_urls["LT"] = "https://static.wixstatic.com/media/1eae9a_f5831ad5e71847a1b1871d2c089e3252~mv2.png";
-type_icon_urls["MT"] = "https://static.wixstatic.com/media/1eae9a_135cf9081f454905bb74bc3e82b684ee~mv2.png";
-type_icon_urls["HT"] = "https://static.wixstatic.com/media/1eae9a_12e817c76f704caa98f6d61521c0182b~mv2.png";
-type_icon_urls["TD"] = "https://static.wixstatic.com/media/1eae9a_dc1f62b383514d489c12b58e8ec68481~mv2.png";
-type_icon_urls["SPG"] = "https://static.wixstatic.com/media/1eae9a_c459211fa515474fb164239436d7b0cd~mv2.png";
+    return dest_str
+end
 
-#filename = ARGV[0]
-filename = "#{Dir.pwd}/dummy.csv"
-begin
-    csv_data = CSV.table(filename)
-    puts "[info] start reading CSV file."
-    p
-    puts "headers : #{csv_data.headers}"
-    p
-    rowcount = 0
-    csv_data.each do |data|
-        #process for a row
-        #
-        print "data : "
-        p data
-        p
-        ###
+def tagger_a(str, target, cls)
+    pretag = "<a href=" + double_quater(cls) + " target=" + double_quater(target) + ">"
+    suftag = "</a>"
+    dest_str = "\n" + pretag + str + suftag
 
+    return dest_str
+end
 
+def tagger_img(str, alt, cls)
+    pretag = "<img src="
+    suftag = " alt=" + double_quater(alt) + ">"
+    dest_str = "\n" + pretag + str + suftag
 
-    end
-rescue => ex
-    puts "[Error] : #{ex.message}"
+    return dest_str
+end
 
-ensure
-    teststr = html_tagger("test", "p")
-    puts "str : #{teststr}"
-end 
+def main()
+    country_flag_urls = Hash.new
+    country_flag_urls["DE"] = "https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png";
+    country_flag_urls["SU"] = "https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png";
+    country_flag_urls["US"] = "https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png";
+    country_flag_urls["JP"] = "https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png";
+    country_flag_urls["CN"] = "https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png";
+    country_flag_urls["GB"] = "https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png";
+    country_flag_urls["FR"] = "https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png";
+    country_flag_urls["CZ"] = "https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png";
+    country_flag_urls["SE"] = "https://static.wixstatic.com/media/1eae9a_2291473f297541c09ea9f811a2326cfd~mv2.png";
+
+    type_icon_urls = Hash.new
+
+    type_icon_urls["LT"] = "https://static.wixstatic.com/media/1eae9a_f5831ad5e71847a1b1871d2c089e3252~mv2.png";
+    type_icon_urls["MT"] = "https://static.wixstatic.com/media/1eae9a_135cf9081f454905bb74bc3e82b684ee~mv2.png";
+    type_icon_urls["HT"] = "https://static.wixstatic.com/media/1eae9a_12e817c76f704caa98f6d61521c0182b~mv2.png";
+    type_icon_urls["TD"] = "https://static.wixstatic.com/media/1eae9a_dc1f62b383514d489c12b58e8ec68481~mv2.png";
+    type_icon_urls["SPG"] = "https://static.wixstatic.com/media/1eae9a_c459211fa515474fb164239436d7b0cd~mv2.png";
+
+        
+    #filename = ARGV[0]
+    filename = "#{Dir.pwd}/dummy.csv"
+
+    begin
+        puts "[info] begin throwing"
+
+        csv_data = CSV.table(filename)
+        puts "[info] start reading CSV file."
+        puts
+        csv_headers = csv_data.headers
+        puts "headers : #{csv_headers}"
+        puts
+
+        output_code = ""
+        rowcount = 1
+
+        csv_data.each do |row|
+
+            puts "--------"
+            data = row[:tier]
+            output_code = output_code + tagger_td(data.to_s, "tier")
+            print output_code
+
+            data = row[:country]
+            country_icon = ""
+            img_code = ""
+
+            if country_flag_urls.has_key?(data)
+                country_icon = country_flag_urls[data]
+                img_code = tagger_img(country_icon, "", "country")
+                puts img_code
+            elsif
+                p "[Error] undefined country code detected."
+            end
+            
+
+            print tagger_td(data, "country")
+
+            data = row[:vehicletype]
+            print tagger_td(data, "vehicletype")
+
+            data = row[:vehiclename]
+            print tagger_td(data, "vehiclename")
+
+            data = row[:map]
+            print tagger_td(data, "map")
+
+            data = row[:exp]
+            print tagger_td(data.to_s, "exp")
+
+            data = row[:instructor]
+            print tagger_td(data, "instructor")
+
+            data = row[:link]
+            print tagger_td(data, "playbutton")
+
+            data = row[:update]
+            print tagger_td(data, "uptade")
+            puts "\n--------"
+            puts
+
+            ###
+
+            rowcount += 1
+        end
+
+        puts
+
+        puts "[info] end throwing"
+
+    rescue => ex
+        puts "[info] begin rescue"
+
+        puts "[Error] : #{ex.message}"
+        puts $@
+
+        puts "[info] end rescue"
+
+    ensure
+        puts "[info] begin ensure"
+
+        puts "[info] end ensure"
+    end 
+end
+
+main()
 
