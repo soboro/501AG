@@ -75,7 +75,7 @@ def tagger_td(str, cls)
     return dest_str
 end
 
-def tagger_a(str, target, cls)
+def tagger_a(str, rul, target)
     pretag = "<a href=" + double_quater(cls) + " target=" + double_quater(target) + ">"
     suftag = "</a>"
     dest_str = "\n" + pretag + str + suftag
@@ -83,10 +83,10 @@ def tagger_a(str, target, cls)
     return dest_str
 end
 
-def tagger_img(str, alt, cls)
+def tagger_img(str, alt)
     pretag = "<img src="
     suftag = " alt=" + double_quater(alt) + ">"
-    dest_str = "\n" + pretag + str + suftag
+    dest_str = pretag + str + suftag
 
     return dest_str
 end
@@ -130,12 +130,14 @@ def main()
 
         csv_data.each do |row|
 
-            puts "--------"
+            puts "========"
 
             # Tier
             data = row[:tier]
-            output_code = output_code + tagger_td(data.to_s, "tier")
+            row_code_tier = tagger_td(data.to_s, "tier")
+            output_code = output_code + row_code_tier
             print output_code
+            puts "\n--------"
 
             # Country
             data = row[:country]
@@ -144,42 +146,77 @@ def main()
 
             if country_icon_urls.has_key?(data)
                 icon_url = country_icon_urls[data]
-                img_code = tagger_img(icon_url, "", "country")
-                puts img_code
+                img_code = tagger_img(icon_url, "")
             elsif
                 p "[Error] undefined country code detected."
             end
 
-            print tagger_td(data, "country")
+            row_code_country = tagger_td(img_code, "country")
+            output_code = output_code + row_code_country
+            print output_code
+            puts "\n--------"
 
             # Vehicletype
             data = row[:vehicletype]
-            print tagger_td(data, "vehicletype")
+            icon_url = ""
+            img_code = ""
+
+            if type_icon_urls.has_key?(data)
+                icon_url = type_icon_urls[data]
+                img_code = tagger_img(icon_url, "")
+            elsif
+                p "[Error] undefined vehicletype code detected."
+            end
+
+            row_code_vehicletype = tagger_td(img_code, "vehicletype")
+            output_code = output_code + row_code_vehicletype
+            print output_code
+            puts "\n--------"
 
             # VihicleName
             data = row[:vehiclename]
-            print tagger_td(data, "vehiclename")
+            row_code_viheclename = tagger_td(data, "vehiclename")
+            output_code = output_code + row_code_viheclename
+            print output_code
+            puts "\n--------"
 
             # Map
             data = row[:map]
-            print tagger_td(data, "map")
+            row_code_map = tagger_td(data, "map")
+            output_code = output_code + row_code_map
+            print output_code
+            puts "\n--------"
 
             # Exp
             data = row[:exp]
-            print tagger_td(data.to_s, "exp")
+            row_code_exp = tagger_td(data.to_s, "exp")
+            output_code = output_code + row_code_exp
+            print output_code
+            puts "\n--------"
 
             # Instructor
             data = row[:instructor]
-            print tagger_td(data, "instructor")
+            row_code_instructor = tagger_td(data, "instructor")
+            output_code = output_code + row_code_instructor
+            print output_code
+            puts "\n--------"
 
             # Link
             data = row[:link]
-            print tagger_td(data, "playbutton")
+            row_code_playbutton = tagger_td(data, "playbutton")
+            output_code = output_code + row_code_playbutton
+            print output_code
+            puts "\n--------"
 
             # Date
             data = row[:update]
-            print tagger_td(data, "uptade")
+            row_code_update = tagger_td(data, "uptade")
+            output_code = output_code + row_code_update
+            print output_code
             puts "\n--------"
+
+            puts
+            puts "========"
             puts
 
             ###
