@@ -92,16 +92,16 @@ def tagger_img(str, alt, cls)
 end
 
 def main()
-    country_flag_urls = Hash.new
-    country_flag_urls["DE"] = "https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png";
-    country_flag_urls["SU"] = "https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png";
-    country_flag_urls["US"] = "https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png";
-    country_flag_urls["JP"] = "https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png";
-    country_flag_urls["CN"] = "https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png";
-    country_flag_urls["GB"] = "https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png";
-    country_flag_urls["FR"] = "https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png";
-    country_flag_urls["CZ"] = "https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png";
-    country_flag_urls["SE"] = "https://static.wixstatic.com/media/1eae9a_2291473f297541c09ea9f811a2326cfd~mv2.png";
+    country_icon_urls = Hash.new
+    country_icon_urls["DE"] = "https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png";
+    country_icon_urls["SU"] = "https://static.wixstatic.com/media/1eae9a_2bf2fadcad624ae0ba0b4d170533ac85~mv2.png";
+    country_icon_urls["US"] = "https://static.wixstatic.com/media/1eae9a_6316e8982ea9487a811e8fa21d2c7146~mv2.png";
+    country_icon_urls["JP"] = "https://static.wixstatic.com/media/1eae9a_c8c64785e1384fb7862c1a29b38a5ef0~mv2.png";
+    country_icon_urls["CN"] = "https://static.wixstatic.com/media/1eae9a_de77a92d9e314c19a22047f590302820~mv2.png";
+    country_icon_urls["GB"] = "https://static.wixstatic.com/media/1eae9a_8b8e121ef13946f6a5431fb73fe3c500~mv2.png";
+    country_icon_urls["FR"] = "https://static.wixstatic.com/media/1eae9a_5d41aabd031c490b8b0b526e96661213~mv2.png";
+    country_icon_urls["CZ"] = "https://static.wixstatic.com/media/1eae9a_c6c7426a36744b37ad42b0f2bfd61c10~mv2.png";
+    country_icon_urls["SE"] = "https://static.wixstatic.com/media/1eae9a_2291473f297541c09ea9f811a2326cfd~mv2.png";
 
     type_icon_urls = Hash.new
 
@@ -131,43 +131,52 @@ def main()
         csv_data.each do |row|
 
             puts "--------"
+
+            # Tier
             data = row[:tier]
             output_code = output_code + tagger_td(data.to_s, "tier")
             print output_code
 
+            # Country
             data = row[:country]
-            country_icon = ""
+            icon_url = ""
             img_code = ""
 
-            if country_flag_urls.has_key?(data)
-                country_icon = country_flag_urls[data]
-                img_code = tagger_img(country_icon, "", "country")
+            if country_icon_urls.has_key?(data)
+                icon_url = country_icon_urls[data]
+                img_code = tagger_img(icon_url, "", "country")
                 puts img_code
             elsif
                 p "[Error] undefined country code detected."
             end
-            
 
             print tagger_td(data, "country")
 
+            # Vehicletype
             data = row[:vehicletype]
             print tagger_td(data, "vehicletype")
 
+            # VihicleName
             data = row[:vehiclename]
             print tagger_td(data, "vehiclename")
 
+            # Map
             data = row[:map]
             print tagger_td(data, "map")
 
+            # Exp
             data = row[:exp]
             print tagger_td(data.to_s, "exp")
 
+            # Instructor
             data = row[:instructor]
             print tagger_td(data, "instructor")
 
+            # Link
             data = row[:link]
             print tagger_td(data, "playbutton")
 
+            # Date
             data = row[:update]
             print tagger_td(data, "uptade")
             puts "\n--------"
