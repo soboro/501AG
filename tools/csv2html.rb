@@ -34,21 +34,32 @@
 
 require 'csv'
 
-COUNTRY_DE = "DE"
-COUNTRY_SU = "SU"
-COUNTRY_US = "US"
-COUNTRY_JP = "JP"
-COUNTRY_CN = "CN"
-COUNTRY_GB = "GB"
-COUNTRY_FR = "FR"
-COUNTRY_CZ = "CZ"
-COUNTRY_SE = "SE"
+NCODE_DE = "DE"
+NCODE_SU = "SU"
+NCODE_US = "US"
+NCODE_JP = "JP"
+NCODE_CN = "CN"
+NCODE_GB = "GB"
+NCODE_FR = "FR"
+NCODE_CZ = "CZ"
+NCODE_SE = "SE"
 
-TYPE_LT = "LT"
-TYPE_MT = "MT"
-TYPE_HT = "HT"
-TYPE_TD = "TD"
-TYPE_SPG = "SPG"
+VTCODE_LT = "LT"
+VTCODE_MT = "MT"
+VTCODE_HT = "HT"
+VTCODE_TD = "TD"
+VTCODE_SPG = "SPG"
+
+CSVHEADER_TIER = "tier"
+CSVHEADER_NATION = "nation"
+CSVHEADER_VTYPE = "vehicletype"
+CSVHEADER_VNAME = "vehiclename"
+CSVHEADER_MAP = "map"
+CSVHEADER_PNAME = "playername"
+CSVHEADER_MURL = "movieurl"
+CSVHEADER_SDATE = "setdate"
+
+CLSNAME_DATAROW = "datarow"
 
 
 def double_quater(str)
@@ -134,13 +145,13 @@ def main()
             puts "========"
 
             # Tier
-            data = row[:tier]
-            row_code = tagger_td(data.to_s, "tier")
+            data = row[CSVHEADER_TIER.to_sym]
+            row_code = tagger_td(data.to_s,CSVHEADER_TIER) 
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
-            # Country
-            data = row[:country]
+            # Nation
+            data = row[CSVHEADER_NATION.to_sym]
             icon_url = ""
             img_code = ""
 
@@ -151,12 +162,12 @@ def main()
                 p "[Error] undefined country code detected."
             end
 
-            row_code = tagger_td(img_code, "country")
+            row_code = tagger_td(img_code, CSVHEADER_NATION)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Vehicletype
-            data = row[:vehicletype]
+            data = row[CSVHEADER_VTYPE.to_sym]
             icon_url = ""
             img_code_vehicletype = ""
 
@@ -167,50 +178,50 @@ def main()
                 p "[Error] undefined vehicletype code detected."
             end
 
-            row_code = tagger_td(img_code_vehicletype, "vehicletype")
+            row_code = tagger_td(img_code_vehicletype, CSVHEADER_VTYPE)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
-            # VihicleName
-            data = row[:vehiclename]
-            row_code = tagger_td(data, "vehiclename")
+            # VehicleName
+            data = row[CSVHEADER_VNAME.to_sym]
+            row_code = tagger_td(data, CSVHEADER_VNAME)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Map
-            data = row[:map]
-            row_code = tagger_td(data, "map")
+            data = row[CSVHEADER_MAP.to_sym]
+            row_code = tagger_td(data, CSVHEADER_MAP)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Exp
-            data = row[:exp]
-            row_code = tagger_td(data.to_s, "exp")
+            data = row[CSVHEADER_EXP.to_sym]
+            row_code = tagger_td(data.to_s, CSVHEADER_EXP)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Instructor
-            data = row[:instructor]
-            row_code = tagger_td(data, "instructor")
+            data = row[CSVHEADER_PNAME.to_sym]
+            row_code = tagger_td(data, CSVHEADER_PNAME)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Link
-            movie_url = row[:link]
+            movie_url = row[CSVHEADER_MURL.to_sym]
             img_code_playbutton = tagger_img(playbutton_icon_url, "")
             link_code_playbutton = tagger_a(img_code_playbutton, movie_url, "_blank")
-            row_code = tagger_td(link_code_playbutton, "playbutton")
+            row_code = tagger_td(link_code_playbutton, CSVHEADER_MURL)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             # Date
-            data = row[:update]
-            row_code = tagger_td(data, "uptade")
+            data = row[CSVHEADER_SDATE.to_sym]
+            row_code = tagger_td(data, CSVHEADER_SDATE)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
             output_code = output_code + "\n"
-            output_code = tagger_tr(output_code, "datarow")
+            output_code = tagger_tr(output_code, CLSNAME_DATAROW)
 
             print output_code
 
