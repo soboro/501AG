@@ -34,6 +34,9 @@
 
 require 'csv'
 
+$__DEBUG_FLG__ = true
+$__DEBUG_FLG__ = false
+
 NCODE_DE = "DE"
 NCODE_SU = "SU"
 NCODE_US = "US"
@@ -55,6 +58,7 @@ CSVHEADER_NATION = "nation"
 CSVHEADER_VTYPE = "vehicletype"
 CSVHEADER_VNAME = "vehiclename"
 CSVHEADER_MAP = "map"
+CSVHEADER_EXP = "exp"
 CSVHEADER_PNAME = "playername"
 CSVHEADER_MURL = "movieurl"
 CSVHEADER_SDATE = "setdate"
@@ -102,6 +106,14 @@ def tagger_img(str, alt)
     return dest_str
 end
 
+def commenter_html(str)
+    prestr = "<!-- "
+    sufstr = " -->"
+    dest_str = prestr + str + sufstr
+
+    return dest_str
+end
+
 def main()
     country_icon_urls = Hash.new
     country_icon_urls["DE"] = "https://static.wixstatic.com/media/1eae9a_25a3791b295c42fda5a5a12b617f4923~mv2.png"
@@ -124,29 +136,40 @@ def main()
 
     playbutton_icon_url = "https://static.wixstatic.com/media/1eae9a_36fe888fd8d442d78da0958b4e6c41d5~mv2.png"
 
-    #filename = ARGV[0]
-    filename = "#{Dir.pwd}/dummy.csv"
+    filename = ARGV[0]
+    #filename = "#{Dir.pwd}/dummy.csv"
 
     begin
-        puts "[info] begin throwing"
+        if $__DEBUG_FLG__
+            puts "[info] begin throwing"
+        end
 
         csv_data = CSV.table(filename)
-        puts "[info] start reading CSV file."
-        puts
-        csv_headers = csv_data.headers
-        puts "headers : #{csv_headers}"
-        puts
+        if $__DEBUG_FLG__
+            puts "[info] start reading CSV file."
+            puts
+            csv_headers = csv_data.headers
+            puts "headers : #{csv_headers}"
+            puts
+        end
 
         output_code = ""
         rowcount = 1
 
+        puts
+        puts "<!-- converted html from csv -->"
+        puts
+
         csv_data.each do |row|
 
-            puts "========"
+            output_code = ""
 
             # Tier
             data = row[CSVHEADER_TIER.to_sym]
             row_code = tagger_td(data.to_s,CSVHEADER_TIER) 
+
+            row_code = commenter_html(row_code)
+
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
@@ -159,7 +182,7 @@ def main()
                 icon_url = country_icon_urls[data]
                 img_code = tagger_img(icon_url, "")
             elsif
-                p "[Error] undefined country code detected."
+                puts "[Error] undefined country code detected."
             end
 
             row_code = tagger_td(img_code, CSVHEADER_NATION)
@@ -175,7 +198,7 @@ def main()
                 icon_url = type_icon_urls[data]
                 img_code_vehicletype = tagger_img(icon_url, "")
             elsif
-                p "[Error] undefined vehicletype code detected."
+                puts "[Error] undefined vehicletype code detected."
             end
 
             row_code = tagger_td(img_code_vehicletype, CSVHEADER_VTYPE)
@@ -200,13 +223,13 @@ def main()
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
-            # Instructor
+            # Player Name
             data = row[CSVHEADER_PNAME.to_sym]
             row_code = tagger_td(data, CSVHEADER_PNAME)
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
-            # Link
+            # Movie URL
             movie_url = row[CSVHEADER_MURL.to_sym]
             img_code_playbutton = tagger_img(playbutton_icon_url, "")
             link_code_playbutton = tagger_a(img_code_playbutton, movie_url, "_blank")
@@ -214,7 +237,7 @@ def main()
             row_code = "\n" + "\t" + row_code
             output_code = output_code + row_code
 
-            # Date
+            # Set Date
             data = row[CSVHEADER_SDATE.to_sym]
             row_code = tagger_td(data, CSVHEADER_SDATE)
             row_code = "\n" + "\t" + row_code
@@ -222,12 +245,9 @@ def main()
 
             output_code = output_code + "\n"
             output_code = tagger_tr(output_code, CLSNAME_DATAROW)
+            output_code = output_code + "\n"
 
             print output_code
-
-            puts
-            puts "========"
-            puts
 
             ###
 
@@ -235,21 +255,33 @@ def main()
         end
 
         puts
+        puts "<!-- end fo convertion -->"
+        puts
 
-        puts "[info] end throwing"
+        if $__DEBUG_FLG__
+            puts "[info] end throwing"
+        end
 
     rescue => ex
-        puts "[info] begin rescue"
+        if $__DEBUG_FLG__
+            puts "[info] begin rescue"
+        end
 
         puts "[Error] : #{ex.message}"
         puts $@
 
-        puts "[info] end rescue"
+        if $__DEBUG_FLG__
+            puts "[info] end rescue"
+        end
 
     ensure
-        puts "[info] begin ensure"
+        if $__DEBUG_FLG__
+            puts "[info] begin ensure"
+        end
 
-        puts "[info] end ensure"
+        if $__DEBUG_FLG__
+            puts "[info] end ensure"
+        end
     end 
 end
 

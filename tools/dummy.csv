@@ -1,2 +1,2 @@
-tier,country,vehicletype,vehiclename,map,exp,instructor,link,update
-1,DE,LT,testTank,崖,9999,_sbr,http://1.testdomain.com/,2017/99/99
+"tier","nation","vehicletype","vehiclename","map","exp","playername","movieurl","setdate"
+"1","DE","LT","testTank","崖","9999","_sbr","http://1.testdomain.com/","2017/99/99"
